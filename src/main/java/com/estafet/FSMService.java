@@ -57,17 +57,17 @@ public class FSMService {
 	}
 
 	public String fsmPost(String command, String body) {
-		System.out.println("\n------- GOT REQUEST METHOD: " +  + "-------");
+		System.out.println("\n------- GOT REQUEST METHOD: " +  "-------");
 
 		System.out.println("URI is <" + command + ">");
 		String[] p = extractParametersFrom(command, "____");
-		String event = p[1].substring(p[1].indexOf("=") + 1);
+		String event = p[0].substring(p[0].indexOf("=") + 1);
 		System.out.println("Event: " + event);
-		String data = br.readLine();
+
 		// System.out.println("data is <<<<<<<<<<<<\n" + data +
 		// "\n<<<<<<<<<<<<");
-		if (data != null)
-			data = data.replaceAll("xxxx", "\n");
+		if (body != null)
+			body = body.replaceAll("xxxx", "\n");
 		// System.out.println("data is >>>>>>>>>>>>\n" + data +
 		// "\n>>>>>>>>>>>>");
 
@@ -85,7 +85,7 @@ public class FSMService {
 			} else
 				System.out.println("Instantiating FSM for role '" + roleName + "' based on '" + protocolName + "'");
 
-			eppLoad(data, protocolName, roleName);
+			eppLoad(body, protocolName, roleName);
 			f = eppInstantiate(roleName);
 			String currentState = f.getCurrentState();
 			String nextStates[] = null;
@@ -105,8 +105,8 @@ public class FSMService {
 					"Trying to execute as an FSM in the role of " + myrole + " with the message <" + command + ">");
 			String message = command;
 			String m = message.substring(message.indexOf("____") + "____".length());
-			if (data != null)
-				payload = FSMExecute(f, m, data);
+			if (body != null)
+				payload = FSMExecute(f, m, body);
 			else
 				payload = FSMExecute(f, m);
 		}
