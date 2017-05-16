@@ -22,13 +22,13 @@ import com.estafet.scribble.easyfsm.FSM.FSM;
 
 @Path("/fsmserver")
 public class FSMService {
-	
+
 	private FSM f;
 	private String myrole = "generic";
 	private String location = "./src/main/resources";
 	static String urlString = "/fsmserver/api";
 	static String payload = urlString + " response.";
-	
+
 	@GET
 	@Path("/api")
 	public String sayHello() {
@@ -38,31 +38,30 @@ public class FSMService {
 		String result = shell.executeCommand("sh ./src/main/resources/bin/abc.sh");
 		return "<h1>Hello World of the GET ::: " + s + "</h1>" + "<br/>" + result;
 	}
-	
+
 	@POST
 	@Path("/api/{command}")
 	public Response postString(@PathParam("command") final String command, String body) {
 		System.out.println(command);
 		System.out.println(body);
-		
+
 		java.nio.file.Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		System.out.println("Current relative path is ::: " + s);
-		
-		//Shell shell = new Shell();
-		//System.out.println(shell.executeCommand("ping -n 3 google.com"));
-		
+
+		// Shell shell = new Shell();
+		// System.out.println(shell.executeCommand("ping -n 3 google.com"));
+
 		String result = fsmPost(command, body);
 		return Response.ok(result, MediaType.TEXT_PLAIN).build();
 	}
-	
-	
+
 	public String fsmPost(String command, String body) {
 		System.out.println("URI is <" + command + ">");
 		String[] p = extractParametersFrom(command, "____");
 		String event = p[1].substring(p[1].indexOf("=") + 1);
 		System.out.println("Event: " + event);
-				// System.out.println("data is <<<<<<<<<<<<\n" + data +
+		// System.out.println("data is <<<<<<<<<<<<\n" + data +
 		// "\n<<<<<<<<<<<<");
 		if (body != null)
 			body = body.replaceAll("xxxx", "\n");
@@ -93,8 +92,8 @@ public class FSMService {
 				availableToDo = availableToDo + "    <" + nextStates[i] + ">\n";
 			}
 			System.out.println("Accepting:\n" + availableToDo);
-			payload = "Instantiated FSM for role '" + roleName + "' based on '" + protocolName + "' for "
-					+ urlString + "\nAccepting:\n" + availableToDo;
+			payload = "Instantiated FSM for role '" + roleName + "' based on '" + protocolName + "' for " + urlString
+					+ "\nAccepting:\n" + availableToDo;
 			// Should be two/three parameters, one is the scribble and the
 			// other is the role name to play
 			// and the third (optional) is the starting state
@@ -111,7 +110,7 @@ public class FSMService {
 
 		return payload;
 	}
-	
+
 	private String eppLoad(String scribble, String protocol, String role) {
 		System.out.println("eppLoad ...");
 		// System.out.println("<<<<\n" + scribble + "\n<<<<<");
@@ -143,7 +142,7 @@ public class FSMService {
 		}
 		// Construct epp command
 		String command = "sh " + location + "/bin/epp.sh " + scribbleFile + " " + protocol + " " + role;
-		//String command = "c:/bash";
+		// String command = "c:/bash";
 
 		System.out.println("command <" + command + ">");
 
@@ -156,7 +155,7 @@ public class FSMService {
 
 		return location + "/bin/generated" + role + "_config.txt";
 	}
-	
+
 	private String[] extractParametersFrom(String uri, String delim) {
 		String[] parameters = null;
 		StringTokenizer st = new StringTokenizer(uri, delim);
@@ -168,8 +167,8 @@ public class FSMService {
 		}
 		return parameters;
 	}
-	
-	static String FSMExecute(FSM f, String msg, String data) {
+
+	private String FSMExecute(FSM f, String msg, String data) {
 		String retval = "";
 		String availableToDo = "";
 		String tmpmsg = msg;
@@ -240,12 +239,12 @@ public class FSMService {
 		return retval;
 	}
 
-	static String FSMExecute(FSM f, String msg) {
+	private String FSMExecute(FSM f, String msg) {
 		String retval = "";
 		String availableToDo = "";
 		String tmpmsg = msg;
 
-		// System.out.println("FSMExecute(" + f + "," + tmpmsg + ")");
+		System.out.println("FSMExecute(" + f + "," + tmpmsg + ")");
 		try {
 			String currentState = f.getCurrentState();
 			System.out.println("Current state before execution is: <" + currentState + ">");
@@ -278,7 +277,6 @@ public class FSMService {
 		return retval;
 	}
 
-	
 	private FSM eppInstantiate(String roleName) {
 		String config = location + "/bin/generated/" + roleName + "_config.txt";
 		// 1. Open file <role>_config.txt
