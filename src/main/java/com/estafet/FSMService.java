@@ -57,14 +57,17 @@ public class FSMService {
 	}
 
 	public String fsmPost(String command, String body) {
+		System.out.println("\n------- GOT REQUEST METHOD: " +  + "-------");
+
 		System.out.println("URI is <" + command + ">");
 		String[] p = extractParametersFrom(command, "____");
 		String event = p[1].substring(p[1].indexOf("=") + 1);
 		System.out.println("Event: " + event);
+		String data = br.readLine();
 		// System.out.println("data is <<<<<<<<<<<<\n" + data +
 		// "\n<<<<<<<<<<<<");
-		if (body != null)
-			body = body.replaceAll("xxxx", "\n");
+		if (data != null)
+			data = data.replaceAll("xxxx", "\n");
 		// System.out.println("data is >>>>>>>>>>>>\n" + data +
 		// "\n>>>>>>>>>>>>");
 
@@ -82,7 +85,7 @@ public class FSMService {
 			} else
 				System.out.println("Instantiating FSM for role '" + roleName + "' based on '" + protocolName + "'");
 
-			eppLoad(body, protocolName, roleName);
+			eppLoad(data, protocolName, roleName);
 			f = eppInstantiate(roleName);
 			String currentState = f.getCurrentState();
 			String nextStates[] = null;
@@ -92,18 +95,18 @@ public class FSMService {
 				availableToDo = availableToDo + "    <" + nextStates[i] + ">\n";
 			}
 			System.out.println("Accepting:\n" + availableToDo);
-			payload = "Instantiated FSM for role '" + roleName + "' based on '" + protocolName + "' for " + urlString
-					+ "\nAccepting:\n" + availableToDo;
-			// Should be two/three parameters, one is the scribble and the
-			// other is the role name to play
+			payload = "Instantiated FSM for role '" + roleName + "' based on '" + protocolName + "' for " + urlString + "\nAccepting:\n" + availableToDo;
+			// Should be two/three parameters, one is the scribble and the other
+			// is the role name to play
 			// and the third (optional) is the starting state
 		} else {
 			// Handle the event as an FSM event
 			System.out.println(
 					"Trying to execute as an FSM in the role of " + myrole + " with the message <" + command + ">");
-			String m = command.substring(command.indexOf("____") + "____".length());
-			if (body != null)
-				payload = FSMExecute(f, m, body);
+			String message = command;
+			String m = message.substring(message.indexOf("____") + "____".length());
+			if (data != null)
+				payload = FSMExecute(f, m, data);
 			else
 				payload = FSMExecute(f, m);
 		}
