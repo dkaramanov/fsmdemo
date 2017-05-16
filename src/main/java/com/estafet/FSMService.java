@@ -18,7 +18,7 @@ public class FSMService {
 		java.nio.file.Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		Shell shell = new Shell();
-		String result = shell.executeCommand("./src/main/resources/bin/sh abc.sh");
+		String result = shell.executeCommand("sh ./src/main/resources/bin/abc.sh");
 		return "<h1>Gello World of the GET ::: " + s + "</h1>" + "<br/>" + result;
 	}
 	
