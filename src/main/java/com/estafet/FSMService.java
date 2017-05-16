@@ -69,7 +69,7 @@ public class FSMService {
 		if (body != null)
 			body = body.replaceAll("xxxx", "\n");
 		// System.out.println("data is >>>>>>>>>>>>\n" + data +
-		// "\n>>>>>>>>>>>>");
+		// "\n>>>>>>>>>>>");
 
 		if (event.startsWith("eppLoad")) {
 			String protocolName = p[1].substring(p[1].indexOf("=") + 1);
