@@ -35,12 +35,6 @@ public class FSMService {
 		Shell shell = new Shell();
 		System.out.println(shell.executeCommand("ping -n 3 google.com"));
 		
-		System.out.println(shell.executeCommand("C:\\JEES\\wildfly-10.1.0.Final\\standalone\\deployments\\FSMDemo.war\\WEB-INF\\classes\\com\\estafet\\abc.bat"));
-		
-		System.out.println(shell.executeCommand("../../abc.bat"));
-		
-		
-		
 		return Response.ok("<h1>Hello World of the POST</h1>", MediaType.TEXT_PLAIN).build();
 	}
 }
