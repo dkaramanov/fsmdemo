@@ -36,7 +36,7 @@ public class FSMService {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		Shell shell = new Shell();
 		String result = shell.executeCommand("sh ./src/main/resources/bin/abc.sh");
-		return "<h1>Gello World of the GET ::: " + s + "</h1>" + "<br/>" + result;
+		return "<h1>Hello World of the GET ::: " + s + "</h1>" + "<br/>" + result;
 	}
 	
 	@POST
