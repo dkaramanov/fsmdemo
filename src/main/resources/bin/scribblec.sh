@@ -61,3 +61,18 @@ fixpath() {
       echo "$cp"
   fi
 }
+
+ARGS=
+
+CLASSPATH=$DIR'/modules/cli/target/classes/'
+CLASSPATH=$CLASSPATH':'$DIR'/modules/core/target/classes'
+CLASSPATH=$CLASSPATH':'$DIR'/modules/parser/target/classes'
+CLASSPATH=$CLASSPATH':'$ANTLR
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/antlr-4.4.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/antlr-runtime-4.4.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/commons-io-1.0.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-cli-1.0.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-core-1.0.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-parser-1.0.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar'
+CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
