@@ -76,3 +76,68 @@ CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-core-1.0.jar'
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-parser-1.0.jar'
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar'
 CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
+
+echo CLASSPATH $CLASSPATH
+
+
+usage=0
+verbose=0
+dot=0
+nondot=0
+
+while true; do
+    case "$1" in
+        "")
+            break
+            ;;
+        #-dot)
+        #    # Should not be used in conjunction with other flags..
+        #    # ..that output to stdout
+        #    ARGS="$ARGS '-fsm'"
+        #    shift
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    dot=$1
+        #    if [ "$dot" == '' ]; then
+        #      echo '-dot missing output file name argument'
+        #      exit 1
+        #    fi
+        #    shift
+        #    ;;
+        -h)
+            usage=1
+            break
+            ;;
+        --help)
+            usage=1
+            break
+            ;;
+        --verbose)
+            verbose=1
+            shift
+            ;;
+        #-ip)
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    ;;
+        #-d)
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    ;;
+        #-subtypes)
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    ;;
+        #-*)
+        #    nondot=1
+        #    ARGS="$ARGS '$1'"
+        #    shift
+        #    ;;
+        *)
+            ARGS="$ARGS '$1'"
+            shift
+            ;;
+    esac
+done
