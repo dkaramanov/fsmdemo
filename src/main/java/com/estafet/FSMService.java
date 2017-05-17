@@ -25,7 +25,7 @@ public class FSMService {
 
 	private FSM f;
 	private String myrole = "generic";
-	private String location = "./src/main/resources";
+	private String location = "$SCRIBBLEDIR/src/main/resources";
 	static String urlString = "/fsmserver/api";
 	static String payload = urlString + " response.";
 
