@@ -159,7 +159,8 @@ if [ "$usage" = 1 ]; then
   exit 0
 fi
 
-CMD="java -cp '$CLASSPATH' org.scribble.cli.CommandLine"
+#CMD="java -cp '$CLASSPATH' org.scribble.cli.CommandLine"
+CMD='ls'
 
 scribblec() {
   eval $CMD "$@"
