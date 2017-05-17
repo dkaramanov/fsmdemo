@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo Dimitar
 # Directory containing Scribble jars
