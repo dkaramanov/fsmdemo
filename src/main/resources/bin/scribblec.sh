@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo Dimitar
 # Directory containing Scribble jars
 LIB=lib
 
