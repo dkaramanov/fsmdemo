@@ -78,7 +78,7 @@ CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-parser-1.0.jar'
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar'
 CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
 
-echo CLASSPATH $CLASSPATH
+echo CLASS___PATH___ $CLASSPATH
 
 
 usage=0
