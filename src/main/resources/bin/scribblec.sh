@@ -75,7 +75,7 @@ CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-cli-1.0.jar
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-core-1.0.jar
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-parser-1.0.jar
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar
-CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
+#CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
 
 
 echo CLASSPATH===$CLASSPATH
@@ -159,8 +159,7 @@ if [ "$usage" = 1 ]; then
   exit 0
 fi
 
-#CMD='java -cp '$CLASSPATH' org.scribble.cli.CommandLine'
-CMD="ls"
+CMD='java -cp "$CLASSPATH" org.scribble.cli.CommandLine'
 
 scribblec() {
   eval $CMD "$@"
