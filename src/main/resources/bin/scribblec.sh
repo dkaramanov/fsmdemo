@@ -78,6 +78,8 @@ CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar
 CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
 
 
+echo CLASSPATH===$CLASSPATH
+
 usage=0
 verbose=0
 dot=0
