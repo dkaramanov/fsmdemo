@@ -1,139 +1,139 @@
-module src.SupplierManagement;
-
-
-type <xsd> "UserName" from "AUTH.xsd" as username;
-type <xsd> "Password" from "AUTH.xsd" as password;
-type <xsd> "UUID" from "AUTH.xsd" as uuid;
-type <xsd> "/retailhub/supplierdetails" from "Retailer.xsd" as supplierdetails;
-type <xsd> "/retailhub/contractdetails" from "Retailer.xsd" as contractdetails;
-
-type <xsd> "..." from "...xsd" as usercontext;
-type <xsd> "..." from "...xsd" as filters;
-
-
-explicit global protocol PartnershipSuppliers
-(
-	role loginsvc,
-	role requestor,
-	role authorisersvc,
-	role filtersvc,
-	role suppliersvc,
-	role contractsvc
-)
-{
-	connect requestor to loginsvc;
-	login(username, password) from requestor to loginsvc;
-	choice at loginsvc
-	{
-		loginfailure() from loginsvc to requestor;
-		//disconnect requestor and loginsvc;
-	}
-	or
-	{
-		loginsuccess() from loginsvc to requestor;
-		//disconnect requestor and loginsvc;
-		connect requestor to authorisersvc;
-		do Main(requestor, authorisersvc, filtersvc, suppliersvc, contractsvc);
-	}
-}
-
-
-aux global protocol Main
-(
-	role requestor,
-	role authorisersvc,
-	role filtersvc,
-	role suppliersvc,
-	role contractsvc
-)
-{
-	choice at requestor
-	{
-		// GET SUPPLIER INFO
-		getsuppliers(uuid) from requestor to authorisersvc;
-		do SuppInfo(requestor, authorisersvc, filtersvc, suppliersvc);
-	}
-	or
-	{
-		// GET CONTRACT INFO
-		getcontracts() from requestor to authorisersvc;
-		do ContractInfo(requestor, authorisersvc, filtersvc, contractsvc);
-	}
-	do Main(requestor, authorisersvc, filtersvc, suppliersvc, contractsvc);
-}
-
-
-aux global protocol SuppInfo
-(
-	role requestor,
-	role authorisersvc,
-	role filtersvc,
-	role suppliersvc
-)
-{
-	choice at authorisersvc
-	{
-		// DENIED
-		deny() from authorisersvc to requestor;
-	}
-	or
-	{
-		connect authorisersvc to suppliersvc;
-		// PREPARE FILTERED SUPPLIER INFO FOR REQUESTOR
-		getsuppliers() from authorisersvc to suppliersvc;
-		suppliers() from suppliersvc to authorisersvc;
-		//disconnect authorisersvc and suppliersvc;
-		do FilterInfo
-				<filterSuppliers(usercontext, filters, supplierdetails)>
-				//<filterContracts(usercontext, filters, supplierdetails)>
-				(authorisersvc, filtersvc);
-		disconnect authorisersvc and suppliersvc;
-		suppliers() from authorisersvc to requestor;
-	}
-}
-
-
-aux global protocol ContractInfo
-(
-	role requestor,
-	role authorisersvc,
-	role filtersvc,
-	role contractsvc
-)
-{
-	choice at authorisersvc
-	{
-		// DENIED
-		deny() from authorisersvc to requestor;
-	}
-	or
-	{
-		connect authorisersvc to contractsvc;
-		// PREPARE FILTERED SUPPLIER INFO FOR REQUESTOR
-		getcontracts() from authorisersvc to contractsvc;
-		contracts() from contractsvc to authorisersvc;
-		//disconnect authorisersvc and contractsvc;
-		do FilterInfo
-				<filterContracts(usercontext, filters, contractdetails)>
-				(authorisersvc, filtersvc);
-		disconnect authorisersvc and contractsvc;
-		contracts() from authorisersvc to requestor;
-	}
-}
-
-
-aux global protocol FilterInfo
-<
-	sig Request
->
-(
-	role authorisersvc,
-	role filtersvc
-)
-{
-	connect authorisersvc to filtersvc;
-	Request from authorisersvc to filtersvc;
-	filtered() from filtersvc to authorisersvc;
-	disconnect authorisersvc and filtersvc;
-}
-
+module src.SupplierManagement;xxxx
+xxxx
+xxxx
+type <xsd> "UserName" from "AUTH.xsd" as username;xxxx
+type <xsd> "Password" from "AUTH.xsd" as password;xxxx
+type <xsd> "UUID" from "AUTH.xsd" as uuid;xxxx
+type <xsd> "/retailhub/supplierdetails" from "Retailer.xsd" as supplierdetails;xxxx
+type <xsd> "/retailhub/contractdetails" from "Retailer.xsd" as contractdetails;xxxx
+xxxx
+type <xsd> "..." from "...xsd" as usercontext;xxxx
+type <xsd> "..." from "...xsd" as filters;xxxx
+xxxx
+xxxx
+explicit global protocol PartnershipSuppliersxxxx
+(xxxx
+	role loginsvc,xxxx
+	role requestor,xxxx
+	role authorisersvc,xxxx
+	role filtersvc,xxxx
+	role suppliersvc,xxxx
+	role contractsvcxxxx
+)xxxx
+{xxxx
+	connect requestor to loginsvc;xxxx
+	login(username, password) from requestor to loginsvc;xxxx
+	choice at loginsvcxxxx
+	{xxxx
+		loginfailure() from loginsvc to requestor;xxxx
+		//disconnect requestor and loginsvc;xxxx
+	}xxxx
+	orxxxx
+	{xxxx
+		loginsuccess() from loginsvc to requestor;xxxx
+		//disconnect requestor and loginsvc;xxxx
+		connect requestor to authorisersvc;xxxx
+		do Main(requestor, authorisersvc, filtersvc, suppliersvc, contractsvc);xxxx
+	}xxxx
+}xxxx
+xxxx
+xxxx
+aux global protocol Mainxxxx
+(xxxx
+	role requestor,xxxx
+	role authorisersvc,xxxx
+	role filtersvc,xxxx
+	role suppliersvc,xxxx
+	role contractsvcxxxx
+)xxxx
+{xxxx
+	choice at requestorxxxx
+	{xxxx
+		// GET SUPPLIER INFOxxxx
+		getsuppliers(uuid) from requestor to authorisersvc;xxxx
+		do SuppInfo(requestor, authorisersvc, filtersvc, suppliersvc);xxxx
+	}xxxx
+	orxxxx
+	{xxxx
+		// GET CONTRACT INFOxxxx
+		getcontracts() from requestor to authorisersvc;xxxx
+		do ContractInfo(requestor, authorisersvc, filtersvc, contractsvc);xxxx
+	}xxxx
+	do Main(requestor, authorisersvc, filtersvc, suppliersvc, contractsvc);xxxx
+}xxxx
+xxxx
+xxxx
+aux global protocol SuppInfoxxxx
+(xxxx
+	role requestor,xxxx
+	role authorisersvc,xxxx
+	role filtersvc,xxxx
+	role suppliersvcxxxx
+)xxxx
+{xxxx
+	choice at authorisersvcxxxx
+	{xxxx
+		// DENIEDxxxx
+		deny() from authorisersvc to requestor;xxxx
+	}xxxx
+	orxxxx
+	{xxxx
+		connect authorisersvc to suppliersvc;xxxx
+		// PREPARE FILTERED SUPPLIER INFO FOR REQUESTORxxxx
+		getsuppliers() from authorisersvc to suppliersvc;xxxx
+		suppliers() from suppliersvc to authorisersvc;xxxx
+		//disconnect authorisersvc and suppliersvc;xxxx
+		do FilterInfoxxxx
+				<filterSuppliers(usercontext, filters, supplierdetails)>xxxx
+				//<filterContracts(usercontext, filters, supplierdetails)>xxxx
+				(authorisersvc, filtersvc);xxxx
+		disconnect authorisersvc and suppliersvc;xxxx
+		suppliers() from authorisersvc to requestor;xxxx
+	}xxxx
+}xxxx
+xxxx
+xxxx
+aux global protocol ContractInfoxxxx
+(xxxx
+	role requestor,xxxx
+	role authorisersvc,xxxx
+	role filtersvc,xxxx
+	role contractsvcxxxx
+)xxxx
+{xxxx
+	choice at authorisersvcxxxx
+	{xxxx
+		// DENIEDxxxx
+		deny() from authorisersvc to requestor;xxxx
+	}xxxx
+	orxxxx
+	{xxxx
+		connect authorisersvc to contractsvc;xxxx
+		// PREPARE FILTERED SUPPLIER INFO FOR REQUESTORxxxx
+		getcontracts() from authorisersvc to contractsvc;xxxx
+		contracts() from contractsvc to authorisersvc;xxxx
+		//disconnect authorisersvc and contractsvc;xxxx
+		do FilterInfoxxxx
+				<filterContracts(usercontext, filters, contractdetails)>xxxx
+				(authorisersvc, filtersvc);xxxx
+		disconnect authorisersvc and contractsvc;xxxx
+		contracts() from authorisersvc to requestor;xxxx
+	}xxxx
+}xxxx
+xxxx
+xxxx
+aux global protocol FilterInfoxxxx
+<xxxx
+	sig Requestxxxx
+>xxxx
+(xxxx
+	role authorisersvc,xxxx
+	role filtersvcxxxx
+)xxxx
+{xxxx
+	connect authorisersvc to filtersvc;xxxx
+	Request from authorisersvc to filtersvc;xxxx
+	filtered() from filtersvc to authorisersvc;xxxx
+	disconnect authorisersvc and filtersvc;xxxx
+}xxxx
+xxxx

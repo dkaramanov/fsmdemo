@@ -36,9 +36,9 @@ fixpath() {
 
 ARGS=
 
-CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/antlr-complete-4.4.jar
-CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/log4j-1.2.8.jar
-CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/fsmxlator-0.1.jar
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/antlr-complete-4.4.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/log4j-1.2.8.jar'
+CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/fsmxlator-0.1.jar'
 CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
 
 usage=0

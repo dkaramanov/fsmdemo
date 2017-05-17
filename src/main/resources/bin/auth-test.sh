@@ -2,9 +2,9 @@
 PORT=$1
 URI=$2
 
-echo "POSTING SupplierManagement.scr for PartnershipSuppliers and projecting authorisersvc"
+echo "POSTING SupplierInfoNoFairBeta.scr for PartnershipSuppliers and projecting authorisersvc"
 echo -n ?; read x
-curl -i --data "@SupplierManagement.scr" http://localhost:${PORT}${URI}/____eppLoad____PartnershipSuppliers____authorisersvc
+curl -i --data "@SupplierInfoNoFairBeta.scr" http://localhost:${PORT}${URI}/____eppLoad____PartnershipSuppliers____authorisersvc
 echo -n ?; read x
 echo "POSTING accept_connection__from_requestor"
 curl -H "Content-Type: application/json" -X POST http://localhost:${PORT}${URI}/____accept_connection__from_requestor
