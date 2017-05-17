@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-echo Dimitar
 # Directory containing Scribble jars
 LIB=lib
 
@@ -78,8 +77,6 @@ CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/scribble-parser-1.0.jar'
 CLASSPATH=$CLASSPATH':'$DIR'/../'$LIB'/stringtemplate-0.1.jar'
 CLASSPATH="'"`fixpath "$CLASSPATH"`"'"
 
-echo CLASS___PATH___ $CLASSPATH
-
 
 usage=0
 verbose=0
@@ -142,3 +139,33 @@ while true; do
             ;;
     esac
 done
+
+#if [ "$dot" != 0 ]; then
+#  if [ $nondot == 1 ]; then
+#    echo '-dot cannot be used in conjunction with other flags that output to stdout: ' $ARGS
+#    exit 1
+#  fi
+#  ARGS="$ARGS |"
+#  ARGS="$ARGS dot"
+#  ARGS="$ARGS '-Tpng'"
+#  ARGS="$ARGS '-o'"
+#  ARGS="$ARGS '$dot'"
+#fi
+
+if [ "$usage" = 1 ]; then
+  usage
+  exit 0
+fi
+
+CMD='java -cp '$CLASSPATH' org.scribble.cli.CommandLine'
+
+scribblec() {
+  eval $CMD "$@"
+}
+
+if [ "$verbose" = 1 ]; then
+  echo $CMD "$ARGS"
+fi
+
+scribblec "$ARGS"
+
